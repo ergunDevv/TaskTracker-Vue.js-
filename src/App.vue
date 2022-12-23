@@ -1,20 +1,31 @@
 <template>
   <div>
     <Header title="Task Tracker" />
-  </div>
+    <TasksComponent v-on:delete-task="deleteTask" :tasks="tasks" />
+</div>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
+import TasksComponent from "./components/Tasks.vue";
+
 export default {
   name: "App",
   components: {
     Header,
+    TasksComponent,
   },
   data() {
     return {
       tasks: [],
     };
+  },
+  methods:{
+    deleteTask(id){
+      if(confirm('Are you sure?')){
+        this.tasks = this.tasks.filter(task=>task.id !==id)
+      }
+    }
   },
   created() {
     this.tasks = [
@@ -26,7 +37,7 @@ export default {
       },
       {
         id:"2",
-        text:'Doctors Appointment',
+        text:'Go to school',
         day:'March 1st at 2.30pm',
         reminder:true,
       },
@@ -34,7 +45,7 @@ export default {
         id:"3",
         text:'Doctors Appointment',
         day:'March 1st at 2.30pm',
-        reminder:true,
+        reminder:false,
       },
 
     ];
