@@ -1,53 +1,64 @@
 <template>
   <div>
     <Header title="Task Tracker" />
-    <TasksComponent v-on:delete-task="deleteTask" :tasks="tasks" />
-</div>
+    <AddTask />
+    <TasksComponent
+      v-on:toggle-reminder="toggleReminder"
+      v-on:delete-task="deleteTask"
+      :tasks="tasks"
+    />
+  </div>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
 import TasksComponent from "./components/Tasks.vue";
+import AddTask from "./components/AddTask.vue";
 
 export default {
   name: "App",
   components: {
     Header,
     TasksComponent,
+    AddTask,
   },
   data() {
     return {
       tasks: [],
     };
   },
-  methods:{
-    deleteTask(id){
-      if(confirm('Are you sure?')){
-        this.tasks = this.tasks.filter(task=>task.id !==id)
+  methods: {
+    deleteTask(id) {
+      console.log(id)
+      if (confirm("Are you sure?")) {
+        this.tasks = this.tasks.filter((task) => task.id !== id);
       }
-    }
+    },
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) =>
+      task.id ===id ? {...task, reminder:!task.reminder} : task )
+    },
   },
   created() {
     this.tasks = [
       {
-        id:"1",
-        text:'Doctors Appointment',
-        day:'March 1st at 2.30pm',
-        reminder:true,
+        id: "1",
+        text: "Doctors Appointment",
+        day: "March 1st at 2.30pm",
+        reminder: true,
       },
       {
-        id:"2",
-        text:'Go to school',
-        day:'March 1st at 2.30pm',
-        reminder:true,
+        id: "2",
+        text: "Go to school",
+        day: "March 1st at 2.30pm",
+        reminder: true,
       },
       {
-        id:"3",
-        text:'Doctors Appointment',
-        day:'March 1st at 2.30pm',
-        reminder:false,
+        id: "3",
+        text: "Doctors Appointment",
+        day: "March 1st at 2.30pm",
+        reminder: false,
       },
-
     ];
   },
 };

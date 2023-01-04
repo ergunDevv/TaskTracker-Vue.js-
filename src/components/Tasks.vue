@@ -1,20 +1,23 @@
 <template>
     <div :key="task.id" v-for="task in tasks">
-        <Task v-on:delete-task="$emit('delete-task',task.id)" :task="task"/>
+      <Task
+        @toggle-reminder="$emit('toggle-reminder', task.id)"
+        @delete-task="$emit('delete-task', task.id)"
+        :task="task"
+      />
     </div>
-</template>
-
-<script>
-import Task from './Task.vue'
-
-export default{
-    name:'TasksComponent',
-    props:{
-        tasks:Array,
+  </template>
+  
+  <script>
+  import Task from './Task'
+  export default {
+    name: 'TasksComponents',
+    props: {
+      tasks: Array,
     },
-    components:{
-        Task
+    components: {
+      Task,
     },
-    emits:['delete-task']
-}
-</script>
+    emits: ['delete-task', 'toggle-reminder'],
+  }
+  </script>
