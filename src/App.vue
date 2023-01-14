@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header title="Task Tracker" />
-    <AddTask />
+    <AddTask @add-task="addTask"/>
     <TasksComponent
       v-on:toggle-reminder="toggleReminder"
       v-on:delete-task="deleteTask"
@@ -38,6 +38,9 @@ export default {
       this.tasks = this.tasks.map((task) =>
       task.id ===id ? {...task, reminder:!task.reminder} : task )
     },
+    addTask(task){
+      this.tasks= [...this.tasks, task];
+    }
   },
   created() {
     this.tasks = [
