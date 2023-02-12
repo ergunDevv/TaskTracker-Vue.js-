@@ -1,9 +1,13 @@
 <template>
   <div>
-    <Header @toggle-add-task="toggleAddTask" title="Task Tracker" />
+    <Header
+      @toggle-add-task="toggleAddTask"
+      title="Task Tracker"
+      :showAddTask="showAddTask"
+    />
 
     <div v-if="showAddTask">
-      <AddTask @add-task="addTask"/>
+      <AddTask @add-task="addTask" />
     </div>
     <TasksComponent
       v-on:toggle-reminder="toggleReminder"
@@ -33,21 +37,22 @@ export default {
   },
   methods: {
     deleteTask(id) {
-      console.log(id)
+      console.log(id);
       if (confirm("Are you sure?")) {
         this.tasks = this.tasks.filter((task) => task.id !== id);
       }
     },
     toggleReminder(id) {
       this.tasks = this.tasks.map((task) =>
-      task.id ===id ? {...task, reminder:!task.reminder} : task )
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      );
     },
-    addTask(task){
-      this.tasks= [...this.tasks, task];
+    addTask(task) {
+      this.tasks = [...this.tasks, task];
     },
-    toggleAddTask(){
-      this.showAddTask=!this.showAddTask;
-    }
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask;
+    },
   },
   created() {
     this.tasks = [

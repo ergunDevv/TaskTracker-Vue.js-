@@ -12,7 +12,7 @@ export default {
     },
     methods:{
         onClicked(){
-            this.$emit('toggle-add-task')
+            this.$emit('btn-click')
         }
     }
 }
