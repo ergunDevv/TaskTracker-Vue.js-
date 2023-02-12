@@ -1,9 +1,8 @@
 <template>
     <header>
         <h1>{{title}}</h1>
-        <ButtonComponent text="Add Task" color="green" />
-        <ButtonComponent text="Update Task" color="blue" />
-        <ButtonComponent text="Delete Task" color="red" />
+        <ButtonComponent @toggle-add-task="$emit('toggle-add-task')" text="Add Task" color="green" />
+
     </header>
 </template>
 
