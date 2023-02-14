@@ -15,7 +15,7 @@
 import ButtonComponent from "./Button.vue";
 
 export default {
-  name: "Header",
+  name: "HeaderComponent",
   props: {
     title: {
       type: String,
